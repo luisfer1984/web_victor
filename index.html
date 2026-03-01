@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juguetes en Venta</title>
+    <style>
+      :root {
+        --bg: #f6f8fb;
+        --surface: #ffffff;
+        --surface-soft: #f2f4f8;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --border: #e5e7eb;
+        --primary: #0f766e;
+        --primary-strong: #115e59;
+        --danger: #b91c1c;
+        --radius: 16px;
+        --shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Avenir Next", "Segoe UI", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 100% 0%, #dff6f3 0%, transparent 40%),
+          radial-gradient(circle at 0% 100%, #fce7f3 0%, transparent 45%),
+          var(--bg);
+        min-height: 100vh;
+      }
+
+      .container {
+        width: min(1100px, 92vw);
+        margin: 0 auto;
+        padding: 2rem 0 3rem;
+      }
+
+      .hero {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.75rem;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(1.8rem, 3vw, 2.5rem);
+        letter-spacing: 0.2px;
+      }
+
+      .subtitle {
+        margin-top: 0.4rem;
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+      .panel {
+        padding: 1rem;
+      }
+
+      .toolbar {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0.75rem;
+        align-items: center;
+      }
+
+      .input,
+      .select,
+      .textarea {
+        width: 100%;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 0.72rem 0.85rem;
+        font-size: 0.95rem;
+        font-family: inherit;
+        background: #fff;
+      }
+
+      .textarea {
+        min-height: 90px;
+        resize: vertical;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 12px;
+        padding: 0.68rem 1rem;
+        font-size: 0.92rem;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        transition: transform 120ms ease, background 120ms ease, opacity 120ms ease;
+      }
+
+      .btn:active {
+        transform: translateY(1px);
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-strong);
+      }
+
+      .btn-soft {
+        background: var(--surface-soft);
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+
+      .btn-danger {
+        background: #fee2e2;
+        color: var(--danger);
+        border: 1px solid #fecaca;
+      }
+
+      .grid {
+        margin-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 1rem;
+      }
+
+      .span-4 {
+        grid-column: span 4;
+      }
+
+      .span-8 {
+        grid-column: span 8;
+      }
+
+      .form-grid {
+        display: grid;
+        gap: 0.7rem;
+      }
+
+      .inline {
+        display: flex;
+        gap: 0.6rem;
+      }
+
+      .inline .input {
+        flex: 1;
+      }
+
+      .hint {
+        margin: 0.3rem 0 0;
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+
+      .image-preview {
+        margin-top: 0.5rem;
+        width: 100%;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        object-fit: cover;
+        max-height: 190px;
+        display: none;
+      }
+
+      .sections {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .section-box {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1rem;
+        background: #fff;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.9rem;
+      }
+
+      .section-title {
+        margin: 0;
+        font-size: 1.12rem;
+      }
+
+      .items-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 0.9rem;
+      }
+
+      .toy-card {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .toy-image {
+        width: 100%;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        display: block;
+        background: #eef2f7;
+      }
+
+      .toy-body {
+        padding: 0.75rem;
+      }
+
+      .toy-name {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      .toy-price {
+        margin: 0.35rem 0;
+        color: var(--primary);
+        font-weight: 700;
+      }
+
+      .toy-note {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .empty {
+        padding: 1.2rem;
+        text-align: center;
+        border: 1px dashed var(--border);
+        border-radius: 14px;
+        color: var(--muted);
+        background: #fbfdff;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 0.32rem 0.6rem;
+        border-radius: 999px;
+        background: #ecfeff;
+        border: 1px solid #c2f4f7;
+        color: #0e7490;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      @media (max-width: 940px) {
+        .span-4,
+        .span-8 {
+          grid-column: span 12;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <header class="hero">
+        <div>
+          <h1>Tienda de Juguetes</h1>
+          <p class="subtitle">Crea secciones, sube fotos y publica juguetes para vender de forma clara.</p>
+        </div>
+        <span class="badge">Todo se guarda en este navegador</span>
+      </header>
+
+      <section class="card panel">
+        <div class="toolbar">
+          <input id="newSectionName" class="input" placeholder="Nueva sección (ej: Coches, Peluches, Juegos de mesa)" />
+          <button id="addSectionBtn" class="btn btn-primary">Crear sección</button>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="card panel span-4">
+          <h2 style="margin: 0 0 0.8rem">Añadir juguete</h2>
+          <div class="form-grid">
+            <select id="sectionSelect" class="select"></select>
+            <input id="toyName" class="input" placeholder="Nombre del juguete" />
+            <input id="toyPrice" class="input" placeholder="Precio (ej: 12€)" />
+            <textarea id="toyDescription" class="textarea" placeholder="Descripción breve (estado, edad recomendada, etc.)"></textarea>
+            <input id="toyImage" type="file" class="input" accept="image/*" />
+            <img id="toyPreview" class="image-preview" alt="Vista previa" />
+            <button id="addToyBtn" class="btn btn-primary">Guardar juguete</button>
+            <p class="hint">La imagen se sube desde aquí y queda guardada para mostrarla en la web.</p>
+          </div>
+        </article>
+
+        <article class="span-8">
+          <div id="sectionsContainer" class="sections"></div>
+        </article>
+      </section>
+    </main>
+
+    <script>
+      const STORAGE_KEY = "toy_store_sections_v1";
+      const defaultData = [{ id: crypto.randomUUID(), name: "Destacados", items: [] }];
+
+      const state = {
+        sections: loadData(),
+        draftImage: "",
+      };
+
+      const newSectionName = document.getElementById("newSectionName");
+      const addSectionBtn = document.getElementById("addSectionBtn");
+      const sectionSelect = document.getElementById("sectionSelect");
+      const toyName = document.getElementById("toyName");
+      const toyPrice = document.getElementById("toyPrice");
+      const toyDescription = document.getElementById("toyDescription");
+      const toyImage = document.getElementById("toyImage");
+      const toyPreview = document.getElementById("toyPreview");
+      const addToyBtn = document.getElementById("addToyBtn");
+      const sectionsContainer = document.getElementById("sectionsContainer");
+
+      function loadData() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return defaultData;
+          const parsed = JSON.parse(raw);
+          if (!Array.isArray(parsed) || parsed.length === 0) return defaultData;
+          return parsed;
+        } catch {
+          return defaultData;
+        }
+      }
+
+      function persist() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state.sections));
+      }
+
+      function renderSectionSelect() {
+        sectionSelect.innerHTML = "";
+        if (state.sections.length === 0) {
+          const option = document.createElement("option");
+          option.textContent = "Crea una sección primero";
+          option.value = "";
+          sectionSelect.appendChild(option);
+          sectionSelect.disabled = true;
+          return;
+        }
+
+        sectionSelect.disabled = false;
+        state.sections.forEach((section) => {
+          const option = document.createElement("option");
+          option.value = section.id;
+          option.textContent = section.name;
+          sectionSelect.appendChild(option);
+        });
+      }
+
+      function renderSections() {
+        sectionsContainer.innerHTML = "";
+
+        if (state.sections.length === 0) {
+          sectionsContainer.innerHTML = '<div class="empty">Todavía no hay secciones. Crea una para empezar.</div>';
+          return;
+        }
+
+        state.sections.forEach((section) => {
+          const box = document.createElement("section");
+          box.className = "section-box";
+
+          const header = document.createElement("div");
+          header.className = "section-header";
+
+          const title = document.createElement("h3");
+          title.className = "section-title";
+          title.textContent = section.name;
+
+          const removeSection = document.createElement("button");
+          removeSection.className = "btn btn-danger";
+          removeSection.textContent = "Eliminar sección";
+          removeSection.onclick = () => {
+            const ok = window.confirm("¿Seguro que quieres eliminar esta sección y todos sus juguetes?");
+            if (!ok) return;
+            state.sections = state.sections.filter((s) => s.id !== section.id);
+            persist();
+            renderAll();
+          };
+
+          header.appendChild(title);
+          header.appendChild(removeSection);
+          box.appendChild(header);
+
+          if (!section.items.length) {
+            const empty = document.createElement("div");
+            empty.className = "empty";
+            empty.textContent = "No hay juguetes en esta sección todavía.";
+            box.appendChild(empty);
+          } else {
+            const grid = document.createElement("div");
+            grid.className = "items-grid";
+
+            section.items.forEach((item) => {
+              const card = document.createElement("article");
+              card.className = "toy-card";
+
+              const img = document.createElement("img");
+              img.className = "toy-image";
+              img.src = item.image || "";
+              img.alt = item.name;
+
+              const body = document.createElement("div");
+              body.className = "toy-body";
+
+              const name = document.createElement("h4");
+              name.className = "toy-name";
+              name.textContent = item.name;
+
+              const price = document.createElement("p");
+              price.className = "toy-price";
+              price.textContent = item.price;
+
+              const note = document.createElement("p");
+              note.className = "toy-note";
+              note.textContent = item.description || "Sin descripción.";
+
+              const removeToy = document.createElement("button");
+              removeToy.className = "btn btn-soft";
+              removeToy.style.marginTop = "0.6rem";
+              removeToy.textContent = "Eliminar";
+              removeToy.onclick = () => {
+                section.items = section.items.filter((toy) => toy.id !== item.id);
+                persist();
+                renderAll();
+              };
+
+              body.append(name, price, note, removeToy);
+              card.append(img, body);
+              grid.appendChild(card);
+            });
+
+            box.appendChild(grid);
+          }
+
+          sectionsContainer.appendChild(box);
+        });
+      }
+
+      function renderAll() {
+        renderSectionSelect();
+        renderSections();
+      }
+
+      addSectionBtn.onclick = () => {
+        const name = newSectionName.value.trim();
+        if (!name) return;
+
+        state.sections.push({ id: crypto.randomUUID(), name, items: [] });
+        newSectionName.value = "";
+        persist();
+        renderAll();
+      };
+
+      toyImage.onchange = async (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        const imageData = await toDataUrl(file);
+        state.draftImage = imageData;
+        toyPreview.src = imageData;
+        toyPreview.style.display = "block";
+      };
+
+      addToyBtn.onclick = () => {
+        if (state.sections.length === 0) {
+          window.alert("Primero crea una sección.");
+          return;
+        }
+
+        const sectionId = sectionSelect.value;
+        const name = toyName.value.trim();
+        const price = toyPrice.value.trim();
+        const description = toyDescription.value.trim();
+
+        if (!sectionId || !name || !price) {
+          window.alert("Completa sección, nombre y precio.");
+          return;
+        }
+
+        const section = state.sections.find((s) => s.id === sectionId);
+        if (!section) return;
+
+        section.items.push({
+          id: crypto.randomUUID(),
+          name,
+          price,
+          description,
+          image: state.draftImage,
+        });
+
+        toyName.value = "";
+        toyPrice.value = "";
+        toyDescription.value = "";
+        toyImage.value = "";
+        state.draftImage = "";
+        toyPreview.style.display = "none";
+        toyPreview.src = "";
+
+        persist();
+        renderAll();
+      };
+
+      function toDataUrl(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      }
+
+      renderAll();
+    </script>
+  </body>
+</html>
