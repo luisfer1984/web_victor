@@ -110,6 +110,29 @@
         font-size: 0.88rem;
       }
 
+      .auth-line {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .auth-state {
+        font-size: 0.82rem;
+        color: #355579;
+        font-weight: 700;
+      }
+
+      .btn-auth {
+        border: 1px solid #c6dcff;
+        border-radius: 12px;
+        background: #ffffff;
+        color: #1f5f9a;
+        padding: 0.45rem 0.68rem;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
       .buy-steps {
         margin: 0 0 1rem;
         display: grid;
@@ -391,6 +414,49 @@
         filter: brightness(1.06);
       }
 
+      .admin-only {
+        display: none;
+      }
+
+      .admin-only.active {
+        display: block;
+      }
+
+      .auth-modal {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(18, 30, 52, 0.45);
+        padding: 1rem;
+      }
+
+      .auth-modal.open {
+        display: flex;
+      }
+
+      .auth-card {
+        width: min(420px, 100%);
+        background: #fff;
+        border-radius: 16px;
+        border: 2px solid #d9e6ff;
+        box-shadow: 0 16px 34px rgba(17, 34, 56, 0.25);
+        padding: 1rem;
+      }
+
+      .auth-title {
+        margin: 0 0 0.2rem;
+        font-family: "Baloo 2", "Trebuchet MS", sans-serif;
+      }
+
+      .auth-msg {
+        margin: 0;
+        color: #ba1f1f;
+        font-size: 0.88rem;
+        min-height: 1.1rem;
+      }
+
       .empty {
         padding: 1.2rem;
         text-align: center;
@@ -461,6 +527,10 @@
           <span class="badge">Se guarda automático en este navegador</span>
           <span class="hero-kpi">Mini mercado de juguetes</span>
           <p class="hero-small">Ideal para vender en el cole o en el parque.</p>
+          <div class="auth-line">
+            <span id="authState" class="auth-state">Modo público</span>
+            <button id="authToggleBtn" class="btn-auth" type="button">Entrar como admin</button>
+          </div>
         </div>
       </header>
 
@@ -470,7 +540,7 @@
         <div class="step"><b>3.</b> Enseña el mensaje a Victor y listo.</div>
       </section>
 
-      <section class="card panel">
+      <section id="sectionEditor" class="card panel admin-only">
         <div class="toolbar">
           <input id="newSectionName" class="input" placeholder="Nueva zona (ej: Superhéroes, LEGO, Peluches)" />
           <button id="addSectionBtn" class="btn btn-primary">Crear sección</button>
@@ -478,7 +548,7 @@
       </section>
 
       <section class="grid">
-        <article class="card panel span-4">
+        <article id="toyEditor" class="card panel span-4 admin-only">
           <h2 style="margin: 0 0 0.8rem; font-family: 'Baloo 2', 'Trebuchet MS', sans-serif">Añadir juguete</h2>
           <div class="form-grid">
             <select id="sectionSelect" class="select"></select>
@@ -498,13 +568,33 @@
       </section>
     </main>
 
+    <div id="authModal" class="auth-modal">
+      <div class="auth-card">
+        <h3 class="auth-title">Acceso administrador</h3>
+        <p class="subtitle" style="margin: 0 0 0.7rem">Solo el admin puede crear secciones, añadir juguetes y eliminar.</p>
+        <div class="form-grid">
+          <input id="adminEmail" class="input" type="email" placeholder="Email admin" />
+          <input id="adminPassword" class="input" type="password" placeholder="Contraseña" />
+          <div style="display: flex; gap: 0.55rem">
+            <button id="adminLoginBtn" class="btn btn-primary" type="button">Entrar</button>
+            <button id="adminCancelBtn" class="btn btn-soft" type="button">Cancelar</button>
+          </div>
+          <p id="authError" class="auth-msg"></p>
+        </div>
+      </div>
+    </div>
+
     <script>
       const STORAGE_KEY = "toy_store_sections_v1";
+      const ADMIN_SESSION_KEY = "toy_store_admin_session_v1";
+      const ADMIN_EMAIL = "luifer.mr@gmail.com";
+      const ADMIN_PASSWORD_HASH = "367f1397dcde01bff991d070274c10f9919714b763c5d31c5b23c87a957fc8d3";
       const defaultData = [{ id: crypto.randomUUID(), name: "Destacados", items: [] }];
 
       const state = {
         sections: loadData(),
         draftImage: "",
+        isAdmin: localStorage.getItem(ADMIN_SESSION_KEY) === "1",
       };
 
       const newSectionName = document.getElementById("newSectionName");
@@ -517,6 +607,16 @@
       const toyPreview = document.getElementById("toyPreview");
       const addToyBtn = document.getElementById("addToyBtn");
       const sectionsContainer = document.getElementById("sectionsContainer");
+      const sectionEditor = document.getElementById("sectionEditor");
+      const toyEditor = document.getElementById("toyEditor");
+      const authModal = document.getElementById("authModal");
+      const authState = document.getElementById("authState");
+      const authToggleBtn = document.getElementById("authToggleBtn");
+      const adminEmail = document.getElementById("adminEmail");
+      const adminPassword = document.getElementById("adminPassword");
+      const adminLoginBtn = document.getElementById("adminLoginBtn");
+      const adminCancelBtn = document.getElementById("adminCancelBtn");
+      const authError = document.getElementById("authError");
 
       function loadData() {
         try {
@@ -532,6 +632,14 @@
 
       function persist() {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state.sections));
+      }
+
+      function renderAdminUI() {
+        const modeText = state.isAdmin ? "Modo admin activo" : "Modo público";
+        authState.textContent = modeText;
+        authToggleBtn.textContent = state.isAdmin ? "Salir de admin" : "Entrar como admin";
+        sectionEditor.classList.toggle("active", state.isAdmin);
+        toyEditor.classList.toggle("active", state.isAdmin);
       }
 
       function renderSectionSelect() {
@@ -585,7 +693,7 @@
           };
 
           header.appendChild(title);
-          header.appendChild(removeSection);
+          if (state.isAdmin) header.appendChild(removeSection);
           box.appendChild(header);
 
           if (!section.items.length) {
@@ -644,7 +752,8 @@
                 renderAll();
               };
 
-              actions.append(reserveBtn, removeToy);
+              actions.appendChild(reserveBtn);
+              if (state.isAdmin) actions.appendChild(removeToy);
               body.append(name, price, note, actions);
               card.append(toyTag, img, body);
               grid.appendChild(card);
@@ -658,11 +767,16 @@
       }
 
       function renderAll() {
+        renderAdminUI();
         renderSectionSelect();
         renderSections();
       }
 
       addSectionBtn.onclick = () => {
+        if (!state.isAdmin) {
+          window.alert("Solo el admin puede crear secciones.");
+          return;
+        }
         const name = newSectionName.value.trim();
         if (!name) return;
 
@@ -683,6 +797,10 @@
       };
 
       addToyBtn.onclick = () => {
+        if (!state.isAdmin) {
+          window.alert("Solo el admin puede añadir juguetes.");
+          return;
+        }
         if (state.sections.length === 0) {
           window.alert("Primero crea una sección.");
           return;
@@ -721,6 +839,41 @@
         renderAll();
       };
 
+      authToggleBtn.onclick = () => {
+        if (state.isAdmin) {
+          state.isAdmin = false;
+          localStorage.removeItem(ADMIN_SESSION_KEY);
+          renderAll();
+          return;
+        }
+        authError.textContent = "";
+        adminEmail.value = "";
+        adminPassword.value = "";
+        authModal.classList.add("open");
+      };
+
+      adminCancelBtn.onclick = () => {
+        authModal.classList.remove("open");
+      };
+
+      authModal.onclick = (e) => {
+        if (e.target === authModal) authModal.classList.remove("open");
+      };
+
+      adminLoginBtn.onclick = async () => {
+        const email = adminEmail.value.trim().toLowerCase();
+        const passHash = await sha256(adminPassword.value);
+
+        if (email === ADMIN_EMAIL && passHash === ADMIN_PASSWORD_HASH) {
+          state.isAdmin = true;
+          localStorage.setItem(ADMIN_SESSION_KEY, "1");
+          authModal.classList.remove("open");
+          renderAll();
+          return;
+        }
+        authError.textContent = "Email o contraseña incorrectos.";
+      };
+
       function toDataUrl(file) {
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
@@ -728,6 +881,14 @@
           reader.onerror = reject;
           reader.readAsDataURL(file);
         });
+      }
+
+      async function sha256(value) {
+        const encoded = new TextEncoder().encode(value);
+        const buffer = await crypto.subtle.digest("SHA-256", encoded);
+        return Array.from(new Uint8Array(buffer))
+          .map((b) => b.toString(16).padStart(2, "0"))
+          .join("");
       }
 
       renderAll();
