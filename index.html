@@ -3,20 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Juguetes en Venta</title>
+    <title>La Juguetienda de Victor</title>
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@500;700&display=swap");
+
       :root {
-        --bg: #f6f8fb;
+        --bg: #fff9ef;
         --surface: #ffffff;
-        --surface-soft: #f2f4f8;
-        --text: #1f2937;
-        --muted: #6b7280;
-        --border: #e5e7eb;
-        --primary: #0f766e;
-        --primary-strong: #115e59;
-        --danger: #b91c1c;
-        --radius: 16px;
-        --shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+        --surface-soft: #f4f8ff;
+        --text: #25324a;
+        --muted: #61708a;
+        --border: #d9e3f5;
+        --primary: #ff7a59;
+        --primary-strong: #ef5f3b;
+        --accent: #35a7ff;
+        --danger: #c62828;
+        --radius: 18px;
+        --shadow: 0 12px 30px rgba(37, 50, 74, 0.1);
       }
 
       * {
@@ -25,11 +28,12 @@
 
       body {
         margin: 0;
-        font-family: "Avenir Next", "Segoe UI", sans-serif;
+        font-family: "Nunito", "Trebuchet MS", sans-serif;
         color: var(--text);
         background:
-          radial-gradient(circle at 100% 0%, #dff6f3 0%, transparent 40%),
-          radial-gradient(circle at 0% 100%, #fce7f3 0%, transparent 45%),
+          radial-gradient(circle at 10% 10%, #fff2cc 0%, transparent 40%),
+          radial-gradient(circle at 90% 0%, #d7efff 0%, transparent 44%),
+          radial-gradient(circle at 0% 100%, #ffdbe8 0%, transparent 45%),
           var(--bg);
         min-height: 100vh;
       }
@@ -51,14 +55,16 @@
 
       h1 {
         margin: 0;
+        font-family: "Baloo 2", "Trebuchet MS", sans-serif;
         font-size: clamp(1.8rem, 3vw, 2.5rem);
-        letter-spacing: 0.2px;
+        line-height: 1;
       }
 
       .subtitle {
         margin-top: 0.4rem;
         color: var(--muted);
-        font-size: 0.98rem;
+        font-size: 1rem;
+        max-width: 62ch;
       }
 
       .card {
@@ -66,6 +72,18 @@
         border: 1px solid var(--border);
         border-radius: var(--radius);
         box-shadow: var(--shadow);
+      }
+
+      .hero-pill {
+        display: inline-block;
+        margin-top: 0.6rem;
+        padding: 0.38rem 0.72rem;
+        border-radius: 999px;
+        background: #eef7ff;
+        border: 1px solid #cbe8ff;
+        color: #1f5f9a;
+        font-weight: 700;
+        font-size: 0.8rem;
       }
 
       .panel {
@@ -104,7 +122,7 @@
         font-weight: 600;
         font-family: inherit;
         cursor: pointer;
-        transition: transform 120ms ease, background 120ms ease, opacity 120ms ease;
+        transition: transform 120ms ease, background 120ms ease, opacity 120ms ease, box-shadow 120ms ease;
       }
 
       .btn:active {
@@ -114,10 +132,12 @@
       .btn-primary {
         background: var(--primary);
         color: #fff;
+        box-shadow: 0 6px 16px rgba(255, 122, 89, 0.35);
       }
 
       .btn-primary:hover {
         background: var(--primary-strong);
+        box-shadow: 0 8px 18px rgba(239, 95, 59, 0.4);
       }
 
       .btn-soft {
@@ -199,7 +219,8 @@
 
       .section-title {
         margin: 0;
-        font-size: 1.12rem;
+        font-family: "Baloo 2", "Trebuchet MS", sans-serif;
+        font-size: 1.25rem;
       }
 
       .items-grid {
@@ -210,9 +231,29 @@
 
       .toy-card {
         border: 1px solid var(--border);
-        border-radius: 14px;
+        border-radius: 16px;
         overflow: hidden;
         background: #fff;
+        position: relative;
+        transition: transform 140ms ease, box-shadow 140ms ease;
+      }
+
+      .toy-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(53, 167, 255, 0.2);
+      }
+
+      .toy-tag {
+        position: absolute;
+        top: 0.5rem;
+        left: 0.5rem;
+        padding: 0.24rem 0.52rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid #ffc9ba;
+        color: #cb4a2f;
+        font-size: 0.74rem;
+        font-weight: 800;
       }
 
       .toy-image {
@@ -229,13 +270,15 @@
 
       .toy-name {
         margin: 0;
-        font-size: 1rem;
+        font-size: 1.06rem;
+        font-family: "Baloo 2", "Trebuchet MS", sans-serif;
       }
 
       .toy-price {
         margin: 0.35rem 0;
-        color: var(--primary);
+        color: var(--accent);
         font-weight: 700;
+        font-size: 1.04rem;
       }
 
       .toy-note {
@@ -255,19 +298,23 @@
 
       .badge {
         display: inline-block;
-        padding: 0.32rem 0.6rem;
+        padding: 0.34rem 0.7rem;
         border-radius: 999px;
-        background: #ecfeff;
-        border: 1px solid #c2f4f7;
-        color: #0e7490;
-        font-size: 0.8rem;
-        font-weight: 600;
+        background: #eef7ff;
+        border: 1px solid #cbe8ff;
+        color: #1f5f9a;
+        font-size: 0.82rem;
+        font-weight: 700;
       }
 
       @media (max-width: 940px) {
         .span-4,
         .span-8 {
           grid-column: span 12;
+        }
+
+        .toolbar {
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -276,31 +323,32 @@
     <main class="container">
       <header class="hero">
         <div>
-          <h1>Tienda de Juguetes</h1>
-          <p class="subtitle">Crea secciones, sube fotos y publica juguetes para vender de forma clara.</p>
+          <h1>La Juguetienda de Victor</h1>
+          <p class="subtitle">Los juguetes favoritos de Victor buscan nuevo dueño. Sube fotos bonitas y organiza todo para que sus amigos quieran llevárselos.</p>
+          <span class="hero-pill">Catálogo hecho para niños: visual, divertido y fácil</span>
         </div>
-        <span class="badge">Todo se guarda en este navegador</span>
+        <span class="badge">Se guarda automático en este navegador</span>
       </header>
 
       <section class="card panel">
         <div class="toolbar">
-          <input id="newSectionName" class="input" placeholder="Nueva sección (ej: Coches, Peluches, Juegos de mesa)" />
+          <input id="newSectionName" class="input" placeholder="Nueva zona (ej: Superhéroes, LEGO, Peluches)" />
           <button id="addSectionBtn" class="btn btn-primary">Crear sección</button>
         </div>
       </section>
 
       <section class="grid">
         <article class="card panel span-4">
-          <h2 style="margin: 0 0 0.8rem">Añadir juguete</h2>
+          <h2 style="margin: 0 0 0.8rem; font-family: 'Baloo 2', 'Trebuchet MS', sans-serif">Añadir juguete</h2>
           <div class="form-grid">
             <select id="sectionSelect" class="select"></select>
-            <input id="toyName" class="input" placeholder="Nombre del juguete" />
-            <input id="toyPrice" class="input" placeholder="Precio (ej: 12€)" />
-            <textarea id="toyDescription" class="textarea" placeholder="Descripción breve (estado, edad recomendada, etc.)"></textarea>
+            <input id="toyName" class="input" placeholder="Nombre chulo del juguete" />
+            <input id="toyPrice" class="input" placeholder="Precio (ej: 8€)" />
+            <textarea id="toyDescription" class="textarea" placeholder="Cuéntales por qué mola: estado, piezas, edad recomendada..."></textarea>
             <input id="toyImage" type="file" class="input" accept="image/*" />
             <img id="toyPreview" class="image-preview" alt="Vista previa" />
             <button id="addToyBtn" class="btn btn-primary">Guardar juguete</button>
-            <p class="hint">La imagen se sube desde aquí y queda guardada para mostrarla en la web.</p>
+            <p class="hint">Consejo: usa fotos claras y con fondo limpio para que destaque.</p>
           </div>
         </article>
 
@@ -413,6 +461,10 @@
               const card = document.createElement("article");
               card.className = "toy-card";
 
+              const toyTag = document.createElement("span");
+              toyTag.className = "toy-tag";
+              toyTag.textContent = "Top de Victor";
+
               const img = document.createElement("img");
               img.className = "toy-image";
               img.src = item.image || "";
@@ -444,7 +496,7 @@
               };
 
               body.append(name, price, note, removeToy);
-              card.append(img, body);
+              card.append(toyTag, img, body);
               grid.appendChild(card);
             });
 
