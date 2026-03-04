@@ -1,0 +1,26 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 240'>
+  <defs>
+    <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#ffe1d6'/>
+      <stop offset='100%' stop-color='#dff1ff'/>
+    </linearGradient>
+  </defs>
+  <rect width='320' height='240' rx='26' fill='url(#bg)'/>
+  <g transform='translate(26 78)'>
+    <rect x='0' y='46' width='96' height='44' rx='12' fill='#5da6ff'/>
+    <rect x='20' y='16' width='56' height='38' rx='10' fill='#7bc3ff'/>
+    <rect x='116' y='36' width='74' height='54' rx='11' fill='#ff9d5b'/>
+    <rect x='198' y='28' width='82' height='62' rx='11' fill='#ffd46c'/>
+    <circle cx='30' cy='96' r='17' fill='#324b72'/>
+    <circle cx='82' cy='96' r='17' fill='#324b72'/>
+    <circle cx='140' cy='96' r='17' fill='#324b72'/>
+    <circle cx='228' cy='96' r='17' fill='#324b72'/>
+    <circle cx='270' cy='96' r='17' fill='#324b72'/>
+    <circle cx='30' cy='96' r='7' fill='#fff'/>
+    <circle cx='82' cy='96' r='7' fill='#fff'/>
+    <circle cx='140' cy='96' r='7' fill='#fff'/>
+    <circle cx='228' cy='96' r='7' fill='#fff'/>
+    <circle cx='270' cy='96' r='7' fill='#fff'/>
+  </g>
+  <text x='16' y='222' font-family='Baloo 2, Trebuchet MS, sans-serif' font-size='28' font-weight='700' fill='#345a87'>Tren Aventura</text>
+</svg>

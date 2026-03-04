@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -173,6 +173,28 @@
         border: 1px solid var(--border);
         border-radius: var(--radius);
         box-shadow: var(--shadow);
+      }
+
+      .hero-gallery {
+        margin: 0.6rem 0 1.2rem;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.8rem;
+      }
+
+      .hero-toy {
+        border-radius: 18px;
+        overflow: hidden;
+        border: 2px solid #d9e8ff;
+        background: #fff;
+        box-shadow: 0 12px 22px rgba(53, 118, 177, 0.18);
+      }
+
+      .hero-toy img {
+        width: 100%;
+        height: 170px;
+        object-fit: cover;
+        display: block;
       }
 
       .hero-pill {
@@ -512,6 +534,10 @@
         .buy-steps {
           grid-template-columns: 1fr;
         }
+
+        .hero-gallery {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -533,6 +559,18 @@
           </div>
         </div>
       </header>
+
+      <section class="hero-gallery" aria-label="Juguetes destacados">
+        <figure class="hero-toy">
+          <img src="assets/rocket.svg" alt="Cohete de juguete de colores" />
+        </figure>
+        <figure class="hero-toy">
+          <img src="assets/dino.svg" alt="Dinosaurio de juguete divertido" />
+        </figure>
+        <figure class="hero-toy">
+          <img src="assets/train.svg" alt="Tren de juguete con vagones" />
+        </figure>
+      </section>
 
       <section class="buy-steps">
         <div class="step"><b>1.</b> Mira los juguetes y elige tu favorito.</div>
@@ -589,7 +627,36 @@
       const ADMIN_SESSION_KEY = "toy_store_admin_session_v1";
       const ADMIN_EMAIL = "luifer.mr@gmail.com";
       const ADMIN_PASSWORD_HASH = "367f1397dcde01bff991d070274c10f9919714b763c5d31c5b23c87a957fc8d3";
-      const defaultData = [{ id: crypto.randomUUID(), name: "Destacados", items: [] }];
+      const fallbackImages = ["assets/rocket.svg", "assets/dino.svg", "assets/train.svg"];
+      const defaultData = [
+        {
+          id: crypto.randomUUID(),
+          name: "Destacados",
+          items: [
+            {
+              id: crypto.randomUUID(),
+              name: "Cohete Turbo",
+              price: "9€",
+              description: "Hace sonidos suaves y luces de colores.",
+              image: "assets/rocket.svg",
+            },
+            {
+              id: crypto.randomUUID(),
+              name: "Dino Risas",
+              price: "7€",
+              description: "Dino blandito para imaginar aventuras jurásicas.",
+              image: "assets/dino.svg",
+            },
+            {
+              id: crypto.randomUUID(),
+              name: "Tren Aventura",
+              price: "12€",
+              description: "Vagones encajables para jugar en equipo.",
+              image: "assets/train.svg",
+            },
+          ],
+        },
+      ];
 
       const state = {
         sections: loadData(),
@@ -705,7 +772,7 @@
             const grid = document.createElement("div");
             grid.className = "items-grid";
 
-            section.items.forEach((item) => {
+            section.items.forEach((item, itemIndex) => {
               const card = document.createElement("article");
               card.className = "toy-card";
 
@@ -715,7 +782,7 @@
 
               const img = document.createElement("img");
               img.className = "toy-image";
-              img.src = item.image || "";
+              img.src = item.image || fallbackImages[itemIndex % fallbackImages.length];
               img.alt = item.name;
 
               const body = document.createElement("div");

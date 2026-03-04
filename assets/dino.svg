@@ -1,0 +1,22 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 240'>
+  <defs>
+    <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#d8ffe8'/>
+      <stop offset='100%' stop-color='#fff6c8'/>
+    </linearGradient>
+  </defs>
+  <rect width='320' height='240' rx='26' fill='url(#bg)'/>
+  <g transform='translate(40 44)'>
+    <ellipse cx='120' cy='98' rx='90' ry='56' fill='#56cb7b'/>
+    <circle cx='204' cy='78' r='34' fill='#56cb7b'/>
+    <circle cx='214' cy='72' r='5' fill='#2b5a42'/>
+    <ellipse cx='204' cy='90' rx='12' ry='8' fill='#2b5a42'/>
+    <path d='M32 88 L0 70 L0 102 Z' fill='#56cb7b'/>
+    <rect x='78' y='136' width='22' height='32' rx='8' fill='#3aa75f'/>
+    <rect x='130' y='136' width='22' height='32' rx='8' fill='#3aa75f'/>
+    <path d='M66 44 L82 22 L94 46 Z' fill='#f8a44f'/>
+    <path d='M96 34 L114 10 L128 38 Z' fill='#f8a44f'/>
+    <path d='M128 30 L146 8 L158 34 Z' fill='#f8a44f'/>
+  </g>
+  <text x='16' y='222' font-family='Baloo 2, Trebuchet MS, sans-serif' font-size='28' font-weight='700' fill='#2d6b4d'>Dino Risas</text>
+</svg>

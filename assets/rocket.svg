@@ -1,0 +1,20 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 240'>
+  <defs>
+    <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#c9ecff'/>
+      <stop offset='100%' stop-color='#ffe7fb'/>
+    </linearGradient>
+  </defs>
+  <rect width='320' height='240' rx='26' fill='url(#bg)'/>
+  <circle cx='260' cy='52' r='22' fill='#ffd863'/>
+  <g transform='translate(30 20)'>
+    <ellipse cx='130' cy='116' rx='64' ry='88' fill='#ff6d5f'/>
+    <ellipse cx='130' cy='116' rx='41' ry='62' fill='#fff3f0'/>
+    <circle cx='130' cy='108' r='22' fill='#8ad1ff'/>
+    <path d='M66 132 L24 160 L58 100 Z' fill='#5dc4ff'/>
+    <path d='M194 132 L236 160 L202 100 Z' fill='#5dc4ff'/>
+    <path d='M111 198 L130 166 L149 198 Z' fill='#ffd15a'/>
+    <path d='M104 214 L130 174 L156 214 Z' fill='#ff9c47'/>
+  </g>
+  <text x='18' y='222' font-family='Baloo 2, Trebuchet MS, sans-serif' font-size='28' font-weight='700' fill='#28547a'>Cohete Turbo</text>
+</svg>
