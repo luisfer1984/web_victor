@@ -36,6 +36,34 @@
           radial-gradient(circle at 0% 100%, #ffdbe8 0%, transparent 45%),
           var(--bg);
         min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        z-index: -1;
+        border-radius: 999px;
+        filter: blur(2px);
+        opacity: 0.6;
+      }
+
+      body::before {
+        width: 240px;
+        height: 240px;
+        background: linear-gradient(135deg, #ffb36b, #ffd66f);
+        top: -60px;
+        left: -40px;
+      }
+
+      body::after {
+        width: 280px;
+        height: 280px;
+        background: linear-gradient(135deg, #7bc8ff, #8bffcd);
+        right: -90px;
+        bottom: -80px;
       }
 
       .container {
@@ -50,7 +78,57 @@
         justify-content: space-between;
         align-items: center;
         gap: 1rem;
-        margin-bottom: 1.75rem;
+        margin-bottom: 1rem;
+      }
+
+      .hero-main {
+        animation: pop-in 420ms ease;
+      }
+
+      .hero-card {
+        display: grid;
+        gap: 0.4rem;
+        min-width: 230px;
+        padding: 0.9rem 1rem;
+        border-radius: 18px;
+        background: linear-gradient(140deg, #ffffff, #f0f8ff);
+        border: 2px solid #d9e8ff;
+        box-shadow: 0 10px 20px rgba(31, 95, 154, 0.15);
+      }
+
+      .hero-kpi {
+        font-size: 1.65rem;
+        line-height: 1;
+        font-weight: 800;
+        font-family: "Baloo 2", "Trebuchet MS", sans-serif;
+        color: #17548c;
+      }
+
+      .hero-small {
+        margin: 0;
+        color: #466588;
+        font-size: 0.88rem;
+      }
+
+      .buy-steps {
+        margin: 0 0 1rem;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.7rem;
+      }
+
+      .step {
+        border-radius: 14px;
+        border: 1px solid #dce8ff;
+        background: #ffffffcc;
+        backdrop-filter: blur(2px);
+        padding: 0.72rem 0.75rem;
+        font-size: 0.9rem;
+        color: #375072;
+      }
+
+      .step b {
+        color: #1f5f9a;
       }
 
       h1 {
@@ -141,9 +219,9 @@
       }
 
       .btn-soft {
-        background: var(--surface-soft);
-        color: var(--text);
-        border: 1px solid var(--border);
+        background: #f8fbff;
+        color: #2f4766;
+        border: 1px solid #d5e4ff;
       }
 
       .btn-danger {
@@ -203,10 +281,10 @@
       }
 
       .section-box {
-        border: 1px solid var(--border);
-        border-radius: 14px;
+        border: 2px solid #d8e5ff;
+        border-radius: 16px;
         padding: 1rem;
-        background: #fff;
+        background: linear-gradient(180deg, #ffffff, #f8fbff);
       }
 
       .section-header {
@@ -226,21 +304,22 @@
       .items-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 0.9rem;
+        gap: 1rem;
       }
 
       .toy-card {
-        border: 1px solid var(--border);
-        border-radius: 16px;
+        border: 2px solid #d7e5ff;
+        border-radius: 18px;
         overflow: hidden;
         background: #fff;
         position: relative;
-        transition: transform 140ms ease, box-shadow 140ms ease;
+        transition: transform 170ms ease, box-shadow 170ms ease;
+        animation: card-in 380ms ease both;
       }
 
       .toy-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 24px rgba(53, 167, 255, 0.2);
+        transform: translateY(-4px) rotate(-0.4deg);
+        box-shadow: 0 16px 28px rgba(53, 167, 255, 0.26);
       }
 
       .toy-tag {
@@ -250,7 +329,7 @@
         padding: 0.24rem 0.52rem;
         border-radius: 999px;
         background: rgba(255, 255, 255, 0.92);
-        border: 1px solid #ffc9ba;
+        border: 1px solid #ffd2a3;
         color: #cb4a2f;
         font-size: 0.74rem;
         font-weight: 800;
@@ -266,6 +345,8 @@
 
       .toy-body {
         padding: 0.75rem;
+        display: grid;
+        gap: 0.45rem;
       }
 
       .toy-name {
@@ -275,7 +356,7 @@
       }
 
       .toy-price {
-        margin: 0.35rem 0;
+        margin: 0;
         color: var(--accent);
         font-weight: 700;
         font-size: 1.04rem;
@@ -285,6 +366,29 @@
         margin: 0;
         color: var(--muted);
         font-size: 0.9rem;
+      }
+
+      .toy-actions {
+        margin-top: 0.15rem;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0.45rem;
+        align-items: center;
+      }
+
+      .btn-kid {
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #35a7ff, #5798ff);
+        color: #fff;
+        font-weight: 800;
+        letter-spacing: 0.2px;
+        padding: 0.56rem 0.75rem;
+        cursor: pointer;
+      }
+
+      .btn-kid:hover {
+        filter: brightness(1.06);
       }
 
       .empty {
@@ -307,6 +411,28 @@
         font-weight: 700;
       }
 
+      @keyframes card-in {
+        from {
+          opacity: 0;
+          transform: translateY(10px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes pop-in {
+        from {
+          opacity: 0;
+          transform: scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
       @media (max-width: 940px) {
         .span-4,
         .span-8 {
@@ -316,19 +442,33 @@
         .toolbar {
           grid-template-columns: 1fr;
         }
+
+        .buy-steps {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
   <body>
     <main class="container">
       <header class="hero">
-        <div>
+        <div class="hero-main">
           <h1>La Juguetienda de Victor</h1>
-          <p class="subtitle">Los juguetes favoritos de Victor buscan nuevo dueño. Sube fotos bonitas y organiza todo para que sus amigos quieran llevárselos.</p>
+          <p class="subtitle">Los juguetes favoritos de Victor buscan nuevo dueño. Ahora con estilo más divertido para que sus amigos entren, miren y digan: "ese me lo pido".</p>
           <span class="hero-pill">Catálogo hecho para niños: visual, divertido y fácil</span>
         </div>
-        <span class="badge">Se guarda automático en este navegador</span>
+        <div class="hero-card">
+          <span class="badge">Se guarda automático en este navegador</span>
+          <span class="hero-kpi">Mini mercado de juguetes</span>
+          <p class="hero-small">Ideal para vender en el cole o en el parque.</p>
+        </div>
       </header>
+
+      <section class="buy-steps">
+        <div class="step"><b>1.</b> Mira los juguetes y elige tu favorito.</div>
+        <div class="step"><b>2.</b> Pulsa <b>Me lo pido</b> en la tarjeta.</div>
+        <div class="step"><b>3.</b> Enseña el mensaje a Victor y listo.</div>
+      </section>
 
       <section class="card panel">
         <div class="toolbar">
@@ -485,17 +625,27 @@
               note.className = "toy-note";
               note.textContent = item.description || "Sin descripción.";
 
+              const actions = document.createElement("div");
+              actions.className = "toy-actions";
+
+              const reserveBtn = document.createElement("button");
+              reserveBtn.className = "btn-kid";
+              reserveBtn.textContent = "Me lo pido";
+              reserveBtn.onclick = () => {
+                window.alert(`Genial! Reserva apuntada para "${item.name}" (${item.price}). Díselo a Victor para confirmar.`);
+              };
+
               const removeToy = document.createElement("button");
               removeToy.className = "btn btn-soft";
-              removeToy.style.marginTop = "0.6rem";
-              removeToy.textContent = "Eliminar";
+              removeToy.textContent = "Quitar";
               removeToy.onclick = () => {
                 section.items = section.items.filter((toy) => toy.id !== item.id);
                 persist();
                 renderAll();
               };
 
-              body.append(name, price, note, removeToy);
+              actions.append(reserveBtn, removeToy);
+              body.append(name, price, note, actions);
               card.append(toyTag, img, body);
               grid.appendChild(card);
             });
