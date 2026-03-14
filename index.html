@@ -1,25 +1,27 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>La Juguetienda de Victor</title>
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@500;700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@500;700;800&display=swap");
 
       :root {
-        --bg: #fff9ef;
+        --bg: #fff8ef;
         --surface: #ffffff;
-        --surface-soft: #f4f8ff;
+        --surface-soft: rgba(255, 255, 255, 0.84);
         --text: #25324a;
         --muted: #61708a;
-        --border: #d9e3f5;
+        --border: #dbe6f8;
         --primary: #ff7a59;
         --primary-strong: #ef5f3b;
         --accent: #35a7ff;
+        --accent-strong: #197bff;
+        --success: #169c63;
         --danger: #c62828;
-        --radius: 18px;
-        --shadow: 0 12px 30px rgba(37, 50, 74, 0.1);
+        --radius: 20px;
+        --shadow: 0 16px 34px rgba(37, 50, 74, 0.12);
       }
 
       * {
@@ -31,9 +33,9 @@
         font-family: "Nunito", "Trebuchet MS", sans-serif;
         color: var(--text);
         background:
-          radial-gradient(circle at 10% 10%, #fff2cc 0%, transparent 40%),
-          radial-gradient(circle at 90% 0%, #d7efff 0%, transparent 44%),
-          radial-gradient(circle at 0% 100%, #ffdbe8 0%, transparent 45%),
+          radial-gradient(circle at 10% 10%, #fff1c6 0%, transparent 34%),
+          radial-gradient(circle at 90% 0%, #d9efff 0%, transparent 38%),
+          radial-gradient(circle at 0% 100%, #ffd8e7 0%, transparent 42%),
           var(--bg);
         min-height: 100vh;
         position: relative;
@@ -46,148 +48,153 @@
         position: fixed;
         z-index: -1;
         border-radius: 999px;
-        filter: blur(2px);
-        opacity: 0.6;
+        opacity: 0.65;
       }
 
       body::before {
-        width: 240px;
-        height: 240px;
-        background: linear-gradient(135deg, #ffb36b, #ffd66f);
-        top: -60px;
-        left: -40px;
+        width: 260px;
+        height: 260px;
+        top: -80px;
+        left: -60px;
+        background: linear-gradient(135deg, #ffbd6d, #ffd66f);
       }
 
       body::after {
-        width: 280px;
-        height: 280px;
-        background: linear-gradient(135deg, #7bc8ff, #8bffcd);
+        width: 300px;
+        height: 300px;
         right: -90px;
-        bottom: -80px;
+        bottom: -90px;
+        background: linear-gradient(135deg, #7cc7ff, #95ffd0);
       }
 
       .container {
-        width: min(1100px, 92vw);
+        width: min(1140px, 92vw);
         margin: 0 auto;
         padding: 2rem 0 3rem;
       }
 
       .hero {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
         gap: 1rem;
+        align-items: stretch;
         margin-bottom: 1rem;
       }
 
+      .hero-main,
+      .hero-side {
+        border-radius: 28px;
+        overflow: hidden;
+        position: relative;
+      }
+
       .hero-main {
+        padding: 1.35rem;
+        background:
+          radial-gradient(circle at top right, rgba(255, 255, 255, 0.7), transparent 28%),
+          linear-gradient(135deg, #ffb457, #ff7a59 52%, #ff5a7d);
+        color: #fff;
+        box-shadow: 0 20px 44px rgba(239, 95, 59, 0.28);
         animation: pop-in 420ms ease;
       }
 
-      .hero-card {
+      .hero-main::after {
+        content: "";
+        position: absolute;
+        right: -35px;
+        bottom: -35px;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .hero-side {
         display: grid;
-        gap: 0.4rem;
-        min-width: 230px;
-        padding: 0.9rem 1rem;
-        border-radius: 18px;
-        background: linear-gradient(140deg, #ffffff, #f0f8ff);
-        border: 2px solid #d9e8ff;
-        box-shadow: 0 10px 20px rgba(31, 95, 154, 0.15);
+        gap: 0.9rem;
       }
 
-      .hero-kpi {
-        font-size: 1.65rem;
-        line-height: 1;
-        font-weight: 800;
-        font-family: "Baloo 2", "Trebuchet MS", sans-serif;
-        color: #17548c;
-      }
-
-      .hero-small {
-        margin: 0;
-        color: #466588;
-        font-size: 0.88rem;
-      }
-
-      .auth-line {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-      }
-
-      .auth-state {
-        font-size: 0.82rem;
-        color: #355579;
-        font-weight: 700;
-      }
-
-      .btn-auth {
-        border: 1px solid #c6dcff;
-        border-radius: 12px;
-        background: #ffffff;
-        color: #1f5f9a;
-        padding: 0.45rem 0.68rem;
-        font-weight: 800;
-        cursor: pointer;
-      }
-
-      .buy-steps {
-        margin: 0 0 1rem;
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 0.7rem;
-      }
-
-      .step {
-        border-radius: 14px;
-        border: 1px solid #dce8ff;
-        background: #ffffffcc;
-        backdrop-filter: blur(2px);
-        padding: 0.72rem 0.75rem;
-        font-size: 0.9rem;
-        color: #375072;
-      }
-
-      .step b {
-        color: #1f5f9a;
-      }
-
-      h1 {
-        margin: 0;
-        font-family: "Baloo 2", "Trebuchet MS", sans-serif;
-        font-size: clamp(1.8rem, 3vw, 2.5rem);
-        line-height: 1;
-      }
-
-      .subtitle {
-        margin-top: 0.4rem;
-        color: var(--muted);
-        font-size: 1rem;
-        max-width: 62ch;
-      }
-
-      .card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
+      .hero-card,
+      .mini-panel,
+      .search-card,
+      .filter-card,
+      .card,
+      .section-box {
+        background: var(--surface-soft);
+        backdrop-filter: blur(7px);
+        border: 2px solid var(--border);
         box-shadow: var(--shadow);
       }
 
+      .hero-card,
+      .mini-panel {
+        border-radius: 24px;
+        padding: 1rem;
+      }
+
+      .hero-kicker {
+        display: inline-flex;
+        padding: 0.42rem 0.74rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.26);
+        color: #fff;
+        font-size: 0.82rem;
+        font-weight: 800;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Baloo 2", "Trebuchet MS", sans-serif;
+      }
+
+      h1 {
+        margin: 0.8rem 0 0;
+        font-size: clamp(2.3rem, 4vw, 4.2rem);
+        line-height: 0.92;
+        max-width: 11ch;
+        text-wrap: balance;
+      }
+
+      .subtitle {
+        margin: 0.9rem 0 1rem;
+        max-width: 44ch;
+        color: rgba(255, 255, 255, 0.96);
+        font-size: 1rem;
+      }
+
+      .hero-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+
+      .hero-pill {
+        display: inline-block;
+        padding: 0.44rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.16);
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        color: #fff;
+        font-size: 0.84rem;
+        font-weight: 800;
+      }
+
       .hero-gallery {
-        margin: 0.6rem 0 1.2rem;
+        margin-top: 1rem;
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 0.8rem;
+        gap: 0.75rem;
       }
 
       .hero-toy {
-        border-radius: 18px;
+        border-radius: 20px;
         overflow: hidden;
-        border: 2px solid #d9e8ff;
-        background: #fff;
-        box-shadow: 0 12px 22px rgba(53, 118, 177, 0.18);
+        border: 2px solid rgba(255, 255, 255, 0.28);
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 16px 26px rgba(134, 42, 38, 0.18);
       }
 
       .hero-toy img {
@@ -195,18 +202,135 @@
         height: 170px;
         object-fit: cover;
         display: block;
+        background: rgba(255, 255, 255, 0.2);
       }
 
-      .hero-pill {
-        display: inline-block;
-        margin-top: 0.6rem;
-        padding: 0.38rem 0.72rem;
-        border-radius: 999px;
-        background: #eef7ff;
-        border: 1px solid #cbe8ff;
+      .hero-card {
+        display: grid;
+        gap: 0.45rem;
+      }
+
+      .hero-small {
+        margin: 0;
+        color: #476486;
+        font-size: 0.9rem;
+      }
+
+      .hero-kpi {
+        color: #17548c;
+        font-size: 1.7rem;
+        line-height: 1;
+        font-weight: 800;
+      }
+
+      .auth-line {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .auth-state,
+      .panel-label {
+        font-size: 0.82rem;
+        color: #355579;
+        font-weight: 800;
+      }
+
+      .btn-auth {
+        border: 1px solid #c7dcff;
+        border-radius: 12px;
+        background: #fff;
         color: #1f5f9a;
-        font-weight: 700;
-        font-size: 0.8rem;
+        padding: 0.46rem 0.7rem;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .mini-panel h3 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+
+      .mini-panel p {
+        margin: 0.15rem 0 0;
+        color: var(--muted);
+      }
+
+      .buy-steps {
+        margin: 0 0 1rem;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+      }
+
+      .step {
+        padding: 0.82rem 0.9rem;
+        border-radius: 18px;
+        border: 1px solid #dbe7f8;
+        background: rgba(255, 255, 255, 0.75);
+        color: #375072;
+      }
+
+      .step b {
+        color: #1f5f9a;
+      }
+
+      .store-controls {
+        margin-bottom: 1rem;
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .search-card,
+      .filter-card {
+        border-radius: 22px;
+        padding: 1rem;
+      }
+
+      .search-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0.75rem;
+        align-items: center;
+      }
+
+      .search-meta {
+        margin: 0.45rem 0 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        margin-top: 0.7rem;
+      }
+
+      .chip {
+        border: 1px solid #d0def9;
+        background: #fff;
+        color: #355579;
+        border-radius: 999px;
+        padding: 0.48rem 0.82rem;
+        font-weight: 800;
+        cursor: pointer;
+        transition: transform 120ms ease, border-color 120ms ease, background 120ms ease, color 120ms ease;
+      }
+
+      .chip:hover {
+        transform: translateY(-1px);
+      }
+
+      .chip.active {
+        color: #fff;
+        border-color: transparent;
+        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      }
+
+      .card {
+        border-radius: var(--radius);
       }
 
       .panel {
@@ -220,63 +344,7 @@
         align-items: center;
       }
 
-      .input,
-      .select,
-      .textarea {
-        width: 100%;
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 0.72rem 0.85rem;
-        font-size: 0.95rem;
-        font-family: inherit;
-        background: #fff;
-      }
-
-      .textarea {
-        min-height: 90px;
-        resize: vertical;
-      }
-
-      .btn {
-        border: none;
-        border-radius: 12px;
-        padding: 0.68rem 1rem;
-        font-size: 0.92rem;
-        font-weight: 600;
-        font-family: inherit;
-        cursor: pointer;
-        transition: transform 120ms ease, background 120ms ease, opacity 120ms ease, box-shadow 120ms ease;
-      }
-
-      .btn:active {
-        transform: translateY(1px);
-      }
-
-      .btn-primary {
-        background: var(--primary);
-        color: #fff;
-        box-shadow: 0 6px 16px rgba(255, 122, 89, 0.35);
-      }
-
-      .btn-primary:hover {
-        background: var(--primary-strong);
-        box-shadow: 0 8px 18px rgba(239, 95, 59, 0.4);
-      }
-
-      .btn-soft {
-        background: #f8fbff;
-        color: #2f4766;
-        border: 1px solid #d5e4ff;
-      }
-
-      .btn-danger {
-        background: #fee2e2;
-        color: var(--danger);
-        border: 1px solid #fecaca;
-      }
-
       .grid {
-        margin-top: 1rem;
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         gap: 1rem;
@@ -295,29 +363,70 @@
         gap: 0.7rem;
       }
 
-      .inline {
-        display: flex;
-        gap: 0.6rem;
+      .input,
+      .select,
+      .textarea {
+        width: 100%;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 0.75rem 0.88rem;
+        font-size: 0.96rem;
+        font-family: inherit;
+        background: #fff;
       }
 
-      .inline .input {
-        flex: 1;
+      .textarea {
+        min-height: 90px;
+        resize: vertical;
       }
 
       .hint {
-        margin: 0.3rem 0 0;
-        font-size: 0.82rem;
+        margin: 0.1rem 0 0;
+        font-size: 0.84rem;
         color: var(--muted);
       }
 
       .image-preview {
-        margin-top: 0.5rem;
+        margin-top: 0.15rem;
         width: 100%;
-        border-radius: 12px;
+        border-radius: 14px;
         border: 1px solid var(--border);
         object-fit: cover;
-        max-height: 190px;
+        max-height: 200px;
         display: none;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 14px;
+        padding: 0.7rem 1rem;
+        font-size: 0.92rem;
+        font-weight: 700;
+        font-family: inherit;
+        cursor: pointer;
+        transition: transform 120ms ease, background 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+      }
+
+      .btn:active {
+        transform: translateY(1px);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+        color: #fff;
+        box-shadow: 0 8px 18px rgba(239, 95, 59, 0.28);
+      }
+
+      .btn-soft {
+        background: #f8fbff;
+        color: #2f4766;
+        border: 1px solid #d5e4ff;
+      }
+
+      .btn-danger {
+        background: #fee2e2;
+        color: var(--danger);
+        border: 1px solid #fecaca;
       }
 
       .sections {
@@ -326,58 +435,67 @@
       }
 
       .section-box {
-        border: 2px solid #d8e5ff;
-        border-radius: 16px;
+        border-radius: 22px;
         padding: 1rem;
-        background: linear-gradient(180deg, #ffffff, #f8fbff);
       }
 
       .section-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.7rem;
         margin-bottom: 0.9rem;
       }
 
       .section-title {
         margin: 0;
-        font-family: "Baloo 2", "Trebuchet MS", sans-serif;
-        font-size: 1.25rem;
+        font-size: 1.4rem;
+      }
+
+      .section-subtitle {
+        margin: 0.12rem 0 0;
+        color: var(--muted);
+        font-size: 0.88rem;
       }
 
       .items-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
         gap: 1rem;
       }
 
       .toy-card {
-        border: 2px solid #d7e5ff;
-        border-radius: 18px;
-        overflow: hidden;
-        background: #fff;
         position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+        border: 2px solid #d8e6ff;
+        background: #fff;
+        box-shadow: 0 14px 28px rgba(53, 167, 255, 0.12);
         transition: transform 170ms ease, box-shadow 170ms ease;
         animation: card-in 380ms ease both;
       }
 
       .toy-card:hover {
-        transform: translateY(-4px) rotate(-0.4deg);
-        box-shadow: 0 16px 28px rgba(53, 167, 255, 0.26);
+        transform: translateY(-4px) rotate(-0.35deg);
+        box-shadow: 0 18px 32px rgba(53, 167, 255, 0.22);
       }
 
       .toy-tag {
         position: absolute;
-        top: 0.5rem;
-        left: 0.5rem;
-        padding: 0.24rem 0.52rem;
+        top: 0.65rem;
+        left: 0.65rem;
+        z-index: 2;
+        padding: 0.28rem 0.56rem;
         border-radius: 999px;
         background: rgba(255, 255, 255, 0.92);
-        border: 1px solid #ffd2a3;
+        border: 1px solid #ffd5ad;
         color: #cb4a2f;
         font-size: 0.74rem;
         font-weight: 800;
+      }
+
+      .toy-media {
+        position: relative;
       }
 
       .toy-image {
@@ -388,52 +506,65 @@
         background: #eef2f7;
       }
 
+      .toy-price-bubble {
+        position: absolute;
+        right: 0.7rem;
+        bottom: 0.7rem;
+        padding: 0.44rem 0.68rem;
+        border-radius: 999px;
+        background: rgba(25, 123, 255, 0.92);
+        color: #fff;
+        font-size: 0.88rem;
+        font-weight: 800;
+        box-shadow: 0 8px 18px rgba(25, 123, 255, 0.28);
+      }
+
       .toy-body {
-        padding: 0.75rem;
         display: grid;
-        gap: 0.45rem;
+        gap: 0.42rem;
+        padding: 0.82rem;
       }
 
       .toy-name {
         margin: 0;
-        font-size: 1.06rem;
-        font-family: "Baloo 2", "Trebuchet MS", sans-serif;
+        font-size: 1.1rem;
       }
 
       .toy-price {
         margin: 0;
         color: var(--accent);
-        font-weight: 700;
-        font-size: 1.04rem;
+        font-weight: 800;
       }
 
       .toy-note {
         margin: 0;
         color: var(--muted);
-        font-size: 0.9rem;
+        font-size: 0.92rem;
+        min-height: 2.8em;
       }
 
       .toy-actions {
-        margin-top: 0.15rem;
         display: grid;
         grid-template-columns: 1fr auto;
-        gap: 0.45rem;
+        gap: 0.5rem;
         align-items: center;
+        margin-top: 0.12rem;
       }
 
       .btn-kid {
         border: none;
-        border-radius: 12px;
-        background: linear-gradient(135deg, #35a7ff, #5798ff);
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
         color: #fff;
         font-weight: 800;
         letter-spacing: 0.2px;
-        padding: 0.56rem 0.75rem;
+        padding: 0.62rem 0.82rem;
         cursor: pointer;
+        box-shadow: 0 10px 20px rgba(25, 123, 255, 0.2);
       }
 
       .btn-kid:hover {
-        filter: brightness(1.06);
+        filter: brightness(1.05);
       }
 
       .admin-only {
@@ -444,59 +575,83 @@
         display: block;
       }
 
-      .auth-modal {
+      .auth-modal,
+      .reserve-modal {
         position: fixed;
         inset: 0;
         display: none;
         align-items: center;
         justify-content: center;
-        background: rgba(18, 30, 52, 0.45);
         padding: 1rem;
+        background: rgba(18, 30, 52, 0.48);
+        z-index: 20;
       }
 
-      .auth-modal.open {
+      .auth-modal.open,
+      .reserve-modal.open {
         display: flex;
       }
 
-      .auth-card {
-        width: min(420px, 100%);
-        background: #fff;
-        border-radius: 16px;
+      .auth-card,
+      .reserve-card {
+        width: min(460px, 100%);
+        border-radius: 22px;
+        padding: 1.1rem;
+        background: linear-gradient(180deg, #ffffff, #fff7ef);
         border: 2px solid #d9e6ff;
-        box-shadow: 0 16px 34px rgba(17, 34, 56, 0.25);
-        padding: 1rem;
+        box-shadow: 0 22px 46px rgba(17, 34, 56, 0.28);
       }
 
-      .auth-title {
-        margin: 0 0 0.2rem;
-        font-family: "Baloo 2", "Trebuchet MS", sans-serif;
+      .auth-title,
+      .reserve-card h3 {
+        margin: 0;
+        font-size: 1.5rem;
       }
 
       .auth-msg {
         margin: 0;
+        min-height: 1.1rem;
         color: #ba1f1f;
         font-size: 0.88rem;
-        min-height: 1.1rem;
+      }
+
+      .reserve-card p {
+        color: var(--muted);
+      }
+
+      .reserve-box {
+        padding: 0.9rem;
+        border-radius: 16px;
+        background: #fff;
+        border: 1px solid #f3d2ac;
+      }
+
+      .reserve-status {
+        color: var(--success);
+        font-weight: 800;
       }
 
       .empty {
-        padding: 1.2rem;
+        padding: 1.25rem;
         text-align: center;
         border: 1px dashed var(--border);
-        border-radius: 14px;
+        border-radius: 16px;
         color: var(--muted);
-        background: #fbfdff;
+        background: rgba(255, 255, 255, 0.78);
       }
 
       .badge {
-        display: inline-block;
-        padding: 0.34rem 0.7rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        padding: 0.34rem 0.72rem;
         border-radius: 999px;
         background: #eef7ff;
         border: 1px solid #cbe8ff;
         color: #1f5f9a;
         font-size: 0.82rem;
-        font-weight: 700;
+        font-weight: 800;
       }
 
       @keyframes card-in {
@@ -513,29 +668,25 @@
       @keyframes pop-in {
         from {
           opacity: 0;
-          transform: scale(0.98);
+          transform: translateY(8px) scale(0.98);
         }
         to {
           opacity: 1;
-          transform: scale(1);
+          transform: translateY(0) scale(1);
         }
       }
 
       @media (max-width: 940px) {
+        .hero,
         .span-4,
-        .span-8 {
-          grid-column: span 12;
-        }
-
-        .toolbar {
-          grid-template-columns: 1fr;
-        }
-
-        .buy-steps {
-          grid-template-columns: 1fr;
-        }
-
+        .span-8,
+        .buy-steps,
         .hero-gallery {
+          grid-template-columns: 1fr;
+        }
+
+        .toolbar,
+        .search-row {
           grid-template-columns: 1fr;
         }
       }
@@ -544,59 +695,87 @@
   <body>
     <main class="container">
       <header class="hero">
-        <div class="hero-main">
-          <h1>La Juguetienda de Victor</h1>
-          <p class="subtitle">Los juguetes favoritos de Victor buscan nuevo dueño. Ahora con estilo más divertido para que sus amigos entren, miren y digan: "ese me lo pido".</p>
-          <span class="hero-pill">Catálogo hecho para niños: visual, divertido y fácil</span>
-        </div>
-        <div class="hero-card">
-          <span class="badge">Se guarda automático en este navegador</span>
-          <span class="hero-kpi">Mini mercado de juguetes</span>
-          <p class="hero-small">Ideal para vender en el cole o en el parque.</p>
-          <div class="auth-line">
-            <span id="authState" class="auth-state">Modo público</span>
-            <button id="authToggleBtn" class="btn-auth" type="button">Entrar como admin</button>
+        <section class="hero-main">
+          <span class="hero-kicker">El mercadillo mas molon de Victor</span>
+          <h1>Juguetes para nuevos duenos</h1>
+          <p class="subtitle">Una mini tienda pensada para que los amigos de Victor entren, vean fotos grandes, encuentren rapido su juguete favorito y se lo pidan al momento.</p>
+          <div class="hero-row">
+            <span class="hero-pill">Fotos grandes</span>
+            <span class="hero-pill">Reserva super facil</span>
+            <span class="hero-pill">Look de jugueteria</span>
           </div>
-        </div>
+
+          <section class="hero-gallery" aria-label="Juguetes destacados">
+            <figure class="hero-toy">
+              <img src="assets/rocket.svg" alt="Cohete de juguete de colores" />
+            </figure>
+            <figure class="hero-toy">
+              <img src="assets/dino.svg" alt="Dinosaurio de juguete divertido" />
+            </figure>
+            <figure class="hero-toy">
+              <img src="assets/train.svg" alt="Tren de juguete con vagones" />
+            </figure>
+          </section>
+        </section>
+
+        <aside class="hero-side">
+          <section class="hero-card">
+            <span class="badge">Se guarda automatico en este navegador</span>
+            <span class="hero-kpi">Mini mercado de juguetes</span>
+            <p class="hero-small">Ideal para compartir con el cole, amigos y primos.</p>
+            <div class="auth-line">
+              <span id="authState" class="auth-state">Modo publico</span>
+              <button id="authToggleBtn" class="btn-auth" type="button">Entrar como admin</button>
+            </div>
+          </section>
+
+          <section class="mini-panel">
+            <h3>Como comprar</h3>
+            <p>Busca, pulsa "Me lo pido" y ensenaselo a Victor para confirmar la reserva.</p>
+          </section>
+        </aside>
       </header>
 
-      <section class="hero-gallery" aria-label="Juguetes destacados">
-        <figure class="hero-toy">
-          <img src="assets/rocket.svg" alt="Cohete de juguete de colores" />
-        </figure>
-        <figure class="hero-toy">
-          <img src="assets/dino.svg" alt="Dinosaurio de juguete divertido" />
-        </figure>
-        <figure class="hero-toy">
-          <img src="assets/train.svg" alt="Tren de juguete con vagones" />
-        </figure>
+      <section class="buy-steps">
+        <div class="step"><b>1.</b> Mira las fotos y elige el juguete que mas te guste.</div>
+        <div class="step"><b>2.</b> Filtra por zona o usa el buscador para encontrarlo rapido.</div>
+        <div class="step"><b>3.</b> Pulsa <b>Me lo pido</b> y avisa a Victor para quedartelo.</div>
       </section>
 
-      <section class="buy-steps">
-        <div class="step"><b>1.</b> Mira los juguetes y elige tu favorito.</div>
-        <div class="step"><b>2.</b> Pulsa <b>Me lo pido</b> en la tarjeta.</div>
-        <div class="step"><b>3.</b> Enseña el mensaje a Victor y listo.</div>
+      <section class="store-controls">
+        <div class="search-card">
+          <div class="search-row">
+            <input id="searchInput" class="input" placeholder="Busca un juguete por nombre o descripcion" />
+            <span id="resultsCount" class="badge">0 juguetes visibles</span>
+          </div>
+          <p class="search-meta">La idea es que los peques entren y encuentren en segundos lo que quieren comprar.</p>
+        </div>
+
+        <div class="filter-card">
+          <span class="panel-label">Filtrar por zona</span>
+          <div id="sectionFilters" class="chip-row"></div>
+        </div>
       </section>
 
       <section id="sectionEditor" class="card panel admin-only">
         <div class="toolbar">
-          <input id="newSectionName" class="input" placeholder="Nueva zona (ej: Superhéroes, LEGO, Peluches)" />
-          <button id="addSectionBtn" class="btn btn-primary">Crear sección</button>
+          <input id="newSectionName" class="input" placeholder="Nueva zona (ej: Superheroes, LEGO, Peluches)" />
+          <button id="addSectionBtn" class="btn btn-primary">Crear seccion</button>
         </div>
       </section>
 
       <section class="grid">
         <article id="toyEditor" class="card panel span-4 admin-only">
-          <h2 style="margin: 0 0 0.8rem; font-family: 'Baloo 2', 'Trebuchet MS', sans-serif">Añadir juguete</h2>
+          <h2 style="margin: 0 0 0.8rem">Anadir juguete</h2>
           <div class="form-grid">
             <select id="sectionSelect" class="select"></select>
             <input id="toyName" class="input" placeholder="Nombre chulo del juguete" />
-            <input id="toyPrice" class="input" placeholder="Precio (ej: 8€)" />
-            <textarea id="toyDescription" class="textarea" placeholder="Cuéntales por qué mola: estado, piezas, edad recomendada..."></textarea>
+            <input id="toyPrice" class="input" placeholder="Precio (ej: 8EUR)" />
+            <textarea id="toyDescription" class="textarea" placeholder="Cuenta por que mola: estado, piezas, edad recomendada..."></textarea>
             <input id="toyImage" type="file" class="input" accept="image/*" />
             <img id="toyPreview" class="image-preview" alt="Vista previa" />
             <button id="addToyBtn" class="btn btn-primary">Guardar juguete</button>
-            <p class="hint">Consejo: usa fotos claras y con fondo limpio para que destaque.</p>
+            <p class="hint">Consejo: una foto clara y alegre hace que la tarjeta destaque mucho mas.</p>
           </div>
         </article>
 
@@ -609,15 +788,31 @@
     <div id="authModal" class="auth-modal">
       <div class="auth-card">
         <h3 class="auth-title">Acceso administrador</h3>
-        <p class="subtitle" style="margin: 0 0 0.7rem">Solo el admin puede crear secciones, añadir juguetes y eliminar.</p>
+        <p style="color: var(--muted)">Solo el admin puede crear secciones, anadir juguetes y eliminar contenido.</p>
         <div class="form-grid">
           <input id="adminEmail" class="input" type="email" placeholder="Email admin" />
-          <input id="adminPassword" class="input" type="password" placeholder="Contraseña" />
+          <input id="adminPassword" class="input" type="password" placeholder="Contrasena" />
           <div style="display: flex; gap: 0.55rem">
             <button id="adminLoginBtn" class="btn btn-primary" type="button">Entrar</button>
             <button id="adminCancelBtn" class="btn btn-soft" type="button">Cancelar</button>
           </div>
           <p id="authError" class="auth-msg"></p>
+        </div>
+      </div>
+    </div>
+
+    <div id="reserveModal" class="reserve-modal">
+      <div class="reserve-card">
+        <h3>Reserva preparada</h3>
+        <p>Este juguete ya esta listo para que se lo ensenes a Victor.</p>
+        <div class="reserve-box">
+          <p id="reserveItemName" style="margin: 0; font-weight: 800; color: var(--text)"></p>
+          <p id="reserveItemPrice" style="margin: 0.25rem 0 0"></p>
+          <p class="reserve-status" style="margin: 0.6rem 0 0">Dile a Victor: "Me pido este juguete".</p>
+        </div>
+        <div style="display: flex; gap: 0.55rem; margin-top: 0.9rem">
+          <button id="reserveCloseBtn" class="btn btn-primary" type="button">Perfecto</button>
+          <button id="reserveKeepBtn" class="btn btn-soft" type="button">Seguir mirando</button>
         </div>
       </div>
     </div>
@@ -636,32 +831,34 @@
             {
               id: crypto.randomUUID(),
               name: "Cohete Turbo",
-              price: "9€",
+              price: "9EUR",
               description: "Hace sonidos suaves y luces de colores.",
-              image: "assets/rocket.svg",
+              image: "assets/rocket.svg"
             },
             {
               id: crypto.randomUUID(),
               name: "Dino Risas",
-              price: "7€",
-              description: "Dino blandito para imaginar aventuras jurásicas.",
-              image: "assets/dino.svg",
+              price: "7EUR",
+              description: "Dino blandito para imaginar aventuras jurasicas.",
+              image: "assets/dino.svg"
             },
             {
               id: crypto.randomUUID(),
               name: "Tren Aventura",
-              price: "12€",
+              price: "12EUR",
               description: "Vagones encajables para jugar en equipo.",
-              image: "assets/train.svg",
-            },
-          ],
-        },
+              image: "assets/train.svg"
+            }
+          ]
+        }
       ];
 
       const state = {
         sections: loadData(),
         draftImage: "",
         isAdmin: localStorage.getItem(ADMIN_SESSION_KEY) === "1",
+        searchQuery: "",
+        selectedSectionId: "all"
       };
 
       const newSectionName = document.getElementById("newSectionName");
@@ -684,6 +881,14 @@
       const adminLoginBtn = document.getElementById("adminLoginBtn");
       const adminCancelBtn = document.getElementById("adminCancelBtn");
       const authError = document.getElementById("authError");
+      const searchInput = document.getElementById("searchInput");
+      const resultsCount = document.getElementById("resultsCount");
+      const sectionFilters = document.getElementById("sectionFilters");
+      const reserveModal = document.getElementById("reserveModal");
+      const reserveItemName = document.getElementById("reserveItemName");
+      const reserveItemPrice = document.getElementById("reserveItemPrice");
+      const reserveCloseBtn = document.getElementById("reserveCloseBtn");
+      const reserveKeepBtn = document.getElementById("reserveKeepBtn");
 
       function loadData() {
         try {
@@ -701,9 +906,22 @@
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state.sections));
       }
 
+      function matchesQuery(item) {
+        const query = state.searchQuery.trim().toLowerCase();
+        if (!query) return true;
+        const haystack = `${item.name} ${item.description || ""}`.toLowerCase();
+        return haystack.includes(query);
+      }
+
+      function getVisibleItemsCount() {
+        return state.sections.reduce((total, section) => {
+          if (state.selectedSectionId !== "all" && state.selectedSectionId !== section.id) return total;
+          return total + section.items.filter(matchesQuery).length;
+        }, 0);
+      }
+
       function renderAdminUI() {
-        const modeText = state.isAdmin ? "Modo admin activo" : "Modo público";
-        authState.textContent = modeText;
+        authState.textContent = state.isAdmin ? "Modo admin activo" : "Modo publico";
         authToggleBtn.textContent = state.isAdmin ? "Salir de admin" : "Entrar como admin";
         sectionEditor.classList.toggle("active", state.isAdmin);
         toyEditor.classList.toggle("active", state.isAdmin);
@@ -713,7 +931,7 @@
         sectionSelect.innerHTML = "";
         if (state.sections.length === 0) {
           const option = document.createElement("option");
-          option.textContent = "Crea una sección primero";
+          option.textContent = "Crea una seccion primero";
           option.value = "";
           sectionSelect.appendChild(option);
           sectionSelect.disabled = true;
@@ -729,61 +947,123 @@
         });
       }
 
+      function renderFilters() {
+        sectionFilters.innerHTML = "";
+
+        const allButton = document.createElement("button");
+        allButton.className = `chip${state.selectedSectionId === "all" ? " active" : ""}`;
+        allButton.type = "button";
+        allButton.textContent = "Todo";
+        allButton.onclick = () => {
+          state.selectedSectionId = "all";
+          renderAll();
+        };
+        sectionFilters.appendChild(allButton);
+
+        state.sections.forEach((section) => {
+          const button = document.createElement("button");
+          button.className = `chip${state.selectedSectionId === section.id ? " active" : ""}`;
+          button.type = "button";
+          button.textContent = section.name;
+          button.onclick = () => {
+            state.selectedSectionId = section.id;
+            renderAll();
+          };
+          sectionFilters.appendChild(button);
+        });
+
+        const count = getVisibleItemsCount();
+        resultsCount.textContent = `${count} juguete${count === 1 ? "" : "s"} visible${count === 1 ? "" : "s"}`;
+      }
+
+      function openReserveModal(item) {
+        reserveItemName.textContent = item.name;
+        reserveItemPrice.textContent = `Precio: ${item.price}`;
+        reserveModal.classList.add("open");
+      }
+
       function renderSections() {
         sectionsContainer.innerHTML = "";
 
         if (state.sections.length === 0) {
-          sectionsContainer.innerHTML = '<div class="empty">Todavía no hay secciones. Crea una para empezar.</div>';
+          sectionsContainer.innerHTML = '<div class="empty">Todavia no hay secciones. Entra como admin para crear la primera.</div>';
           return;
         }
 
+        let renderedSections = 0;
+
         state.sections.forEach((section) => {
+          if (state.selectedSectionId !== "all" && state.selectedSectionId !== section.id) return;
+
+          const visibleItems = section.items.filter(matchesQuery);
+          if (!state.isAdmin && visibleItems.length === 0) return;
+
+          renderedSections += 1;
+
           const box = document.createElement("section");
           box.className = "section-box";
 
           const header = document.createElement("div");
           header.className = "section-header";
 
+          const titleWrap = document.createElement("div");
+
           const title = document.createElement("h3");
           title.className = "section-title";
           title.textContent = section.name;
 
+          const subtitle = document.createElement("p");
+          subtitle.className = "section-subtitle";
+          subtitle.textContent = `${visibleItems.length} juguete${visibleItems.length === 1 ? "" : "s"} en esta zona`;
+
+          titleWrap.append(title, subtitle);
+
           const removeSection = document.createElement("button");
           removeSection.className = "btn btn-danger";
-          removeSection.textContent = "Eliminar sección";
+          removeSection.textContent = "Eliminar seccion";
           removeSection.onclick = () => {
-            const ok = window.confirm("¿Seguro que quieres eliminar esta sección y todos sus juguetes?");
+            const ok = window.confirm("Seguro que quieres eliminar esta seccion y todos sus juguetes?");
             if (!ok) return;
             state.sections = state.sections.filter((s) => s.id !== section.id);
+            if (state.selectedSectionId === section.id) state.selectedSectionId = "all";
             persist();
             renderAll();
           };
 
-          header.appendChild(title);
+          header.appendChild(titleWrap);
           if (state.isAdmin) header.appendChild(removeSection);
           box.appendChild(header);
 
-          if (!section.items.length) {
+          if (!visibleItems.length) {
             const empty = document.createElement("div");
             empty.className = "empty";
-            empty.textContent = "No hay juguetes en esta sección todavía.";
+            empty.textContent = state.searchQuery ? "No hay juguetes que coincidan con la busqueda en esta zona." : "No hay juguetes en esta seccion todavia.";
             box.appendChild(empty);
           } else {
             const grid = document.createElement("div");
             grid.className = "items-grid";
 
-            section.items.forEach((item, itemIndex) => {
+            visibleItems.forEach((item, itemIndex) => {
               const card = document.createElement("article");
               card.className = "toy-card";
 
-              const toyTag = document.createElement("span");
-              toyTag.className = "toy-tag";
-              toyTag.textContent = "Top de Victor";
+              const tag = document.createElement("span");
+              tag.className = "toy-tag";
+              tag.textContent = "Top de Victor";
+
+              const media = document.createElement("div");
+              media.className = "toy-media";
 
               const img = document.createElement("img");
               img.className = "toy-image";
               img.src = item.image || fallbackImages[itemIndex % fallbackImages.length];
               img.alt = item.name;
+
+              const bubble = document.createElement("span");
+              bubble.className = "toy-price-bubble";
+              bubble.textContent = item.price;
+
+              media.append(img, bubble);
 
               const body = document.createElement("div");
               body.className = "toy-body";
@@ -798,7 +1078,7 @@
 
               const note = document.createElement("p");
               note.className = "toy-note";
-              note.textContent = item.description || "Sin descripción.";
+              note.textContent = item.description || "Sin descripcion.";
 
               const actions = document.createElement("div");
               actions.className = "toy-actions";
@@ -806,23 +1086,24 @@
               const reserveBtn = document.createElement("button");
               reserveBtn.className = "btn-kid";
               reserveBtn.textContent = "Me lo pido";
-              reserveBtn.onclick = () => {
-                window.alert(`Genial! Reserva apuntada para "${item.name}" (${item.price}). Díselo a Victor para confirmar.`);
-              };
-
-              const removeToy = document.createElement("button");
-              removeToy.className = "btn btn-soft";
-              removeToy.textContent = "Quitar";
-              removeToy.onclick = () => {
-                section.items = section.items.filter((toy) => toy.id !== item.id);
-                persist();
-                renderAll();
-              };
+              reserveBtn.onclick = () => openReserveModal(item);
 
               actions.appendChild(reserveBtn);
-              if (state.isAdmin) actions.appendChild(removeToy);
+
+              if (state.isAdmin) {
+                const removeToy = document.createElement("button");
+                removeToy.className = "btn btn-soft";
+                removeToy.textContent = "Quitar";
+                removeToy.onclick = () => {
+                  section.items = section.items.filter((toy) => toy.id !== item.id);
+                  persist();
+                  renderAll();
+                };
+                actions.appendChild(removeToy);
+              }
+
               body.append(name, price, note, actions);
-              card.append(toyTag, img, body);
+              card.append(tag, media, body);
               grid.appendChild(card);
             });
 
@@ -831,11 +1112,16 @@
 
           sectionsContainer.appendChild(box);
         });
+
+        if (renderedSections === 0) {
+          sectionsContainer.innerHTML = '<div class="empty">No hay resultados con esos filtros. Prueba otra zona o cambia la busqueda.</div>';
+        }
       }
 
       function renderAll() {
         renderAdminUI();
         renderSectionSelect();
+        renderFilters();
         renderSections();
       }
 
@@ -844,6 +1130,7 @@
           window.alert("Solo el admin puede crear secciones.");
           return;
         }
+
         const name = newSectionName.value.trim();
         if (!name) return;
 
@@ -865,11 +1152,12 @@
 
       addToyBtn.onclick = () => {
         if (!state.isAdmin) {
-          window.alert("Solo el admin puede añadir juguetes.");
+          window.alert("Solo el admin puede anadir juguetes.");
           return;
         }
+
         if (state.sections.length === 0) {
-          window.alert("Primero crea una sección.");
+          window.alert("Primero crea una seccion.");
           return;
         }
 
@@ -879,7 +1167,7 @@
         const description = toyDescription.value.trim();
 
         if (!sectionId || !name || !price) {
-          window.alert("Completa sección, nombre y precio.");
+          window.alert("Completa seccion, nombre y precio.");
           return;
         }
 
@@ -891,7 +1179,7 @@
           name,
           price,
           description,
-          image: state.draftImage,
+          image: state.draftImage
         });
 
         toyName.value = "";
@@ -913,6 +1201,7 @@
           renderAll();
           return;
         }
+
         authError.textContent = "";
         adminEmail.value = "";
         adminPassword.value = "";
@@ -927,6 +1216,18 @@
         if (e.target === authModal) authModal.classList.remove("open");
       };
 
+      reserveModal.onclick = (e) => {
+        if (e.target === reserveModal) reserveModal.classList.remove("open");
+      };
+
+      reserveCloseBtn.onclick = () => {
+        reserveModal.classList.remove("open");
+      };
+
+      reserveKeepBtn.onclick = () => {
+        reserveModal.classList.remove("open");
+      };
+
       adminLoginBtn.onclick = async () => {
         const email = adminEmail.value.trim().toLowerCase();
         const passHash = await sha256(adminPassword.value);
@@ -938,7 +1239,13 @@
           renderAll();
           return;
         }
-        authError.textContent = "Email o contraseña incorrectos.";
+
+        authError.textContent = "Email o contrasena incorrectos.";
+      };
+
+      searchInput.oninput = (event) => {
+        state.searchQuery = event.target.value;
+        renderAll();
       };
 
       function toDataUrl(file) {
